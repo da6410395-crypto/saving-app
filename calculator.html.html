@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>الحاسبة</title>
+    <style>
+        body { background: #000; color: #fff; text-align: center; font-family: sans-serif; padding-top: 50px; }
+        .circle { width: 200px; height: 200px; border-radius: 50%; background: conic-gradient(#333 0deg, #333 0deg); display: flex; align-items: center; justify-content: center; margin: 20px auto; transition: 0.8s; }
+        .inner { width: 170px; height: 170px; border-radius: 50%; background: #000; display: flex; flex-direction: column; justify-content: center; }
+        input { padding: 12px; width: 150px; border-radius: 10px; border: none; background: #222; color: white; text-align: center; }
+        button { padding: 12px 25px; background: #bb86fc; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2 id="msg"></h2>
+    <div class="circle" id="circle"><div class="inner"><h1 id="total">0</h1></div></div>
+    <input type="number" id="amount" placeholder="مبلغ الإيداع">
+    <button onclick="add()">إيداع</button>
+    <p id="congrats" style="color: #bb86fc; font-weight: bold; margin-top: 20px; display: none;">🎉 مبروك حققتِ الهدف!</p>
+
+    <script>
+        let total = 0;
+        let goal = parseInt(localStorage.getItem('userGoal'));
+        document.getElementById('msg').innerText = "أهلاً " + localStorage.getItem('userName');
+        
+        function add() {
+            let val = parseInt(document.getElementById('amount').value);
+            if(isNaN(val)) return;
+            total += val;
+            document.getElementById('total').innerText = total;
+            let deg = (total / goal) * 360;
+            document.getElementById('circle').style.background = `conic-gradient(#bb86fc ${deg}deg, #333 ${deg}deg)`;
+            if(total >= goal) document.getElementById('congrats').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
