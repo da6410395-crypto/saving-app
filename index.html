@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تطبيق الإدخار</title>
+    <style>
+        body { background: #000; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: #121212; padding: 40px; border-radius: 20px; text-align: center; border: 1px solid #bb86fc; width: 300px; }
+        input { width: 90%; padding: 12px; margin: 10px 0; border-radius: 10px; border: none; background: #222; color: white; text-align: center; }
+        button { width: 95%; padding: 15px; background: #bb86fc; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>موقع داليا للإدخار</h1>
+        <input type="text" id="name" placeholder="اسمك الكريم">
+        <input type="number" id="goal" placeholder="الهدف (ريال)">
+        <button onclick="saveAndMove()">ابدأ الرحلة</button>
+    </div>
+
+    <script>
+        function saveAndMove() {
+            let name = document.getElementById('name').value;
+            let goal = document.getElementById('goal').value;
+            if(name && goal) {
+                localStorage.setItem('userName', name);
+                localStorage.setItem('userGoal', goal);
+                // هذا التعديل يضمن الانتقال لأي مكان
+                window.location.href = 'calculator.html'; 
+            } else {
+                alert("اكتبي الاسم والهدف!");
+            }
+        }
+    </script>
+</body>
+</html>

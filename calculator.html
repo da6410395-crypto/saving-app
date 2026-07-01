@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>الحاسبة</title>
+    <style>
+        body { background: #000; color: #fff; text-align: center; font-family: sans-serif; padding-top: 50px; }
+        .circle { width: 200px; height: 200px; border-radius: 50%; background: conic-gradient(#333 0deg, #333 0deg); display: flex; align-items: center; justify-content: center; margin: 20px auto; transition: 0.5s; }
+        .inner { width: 170px; height: 170px; border-radius: 50%; background: #000; display: flex; flex-direction: column; justify-content: center; }
+        input { padding: 10px; width: 150px; border-radius: 10px; border: none; }
+        button { padding: 10px 20px; background: #bb86fc; border: none; border-radius: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2 id="msg"></h2>
+    <div class="circle" id="circle"><div class="inner"><h1 id="total">0</h1></div></div>
+    <input type="number" id="amount" placeholder="المبلغ">
+    <button onclick="add()">إيداع</button>
+
+    <script>
+        let total = 0;
+        let goal = parseInt(localStorage.getItem('userGoal')) || 1000;
+        document.getElementById('msg').innerText = "أهلاً " + (localStorage.getItem('userName') || "صديقتي");
+
+        function add() {
+            let val = parseInt(document.getElementById('amount').value);
+            if(!val) return;
+            total += val;
+            document.getElementById('total').innerText = total;
+            let deg = (total / goal) * 360;
+            document.getElementById('circle').style.background = `conic-gradient(#bb86fc ${deg}deg, #333 ${deg}deg)`;
+            if(total >= goal) alert("كفووو! حققتِ الهدف!");
+        }
+    </script>
+</body>
+</html>
